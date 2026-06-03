@@ -12,16 +12,14 @@ webs=(
 webs_status=("down" "down" "down" "down" "down")
 
 for i in "${!webs[@]}"; do
-    link=${webs[$i]}
-    curl -s --max-time 5 "$link" > /dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        webs_status[$i]="down"
+    if curl -s --max-time 10 "${webs[$i]}" > /dev/null 2>&1; then
+        webs_status[$i]="up"
     else
-        webs_status[$i]="up"   
+        webs_status[$i]="down"
     fi
 done
 
-cat > ../pages/status.html << EOF
+cat > /home/ubuntu/devops-week1-project/pages/index.html << EOF
 <html>
 <title>Status Logs</title>
 <body>

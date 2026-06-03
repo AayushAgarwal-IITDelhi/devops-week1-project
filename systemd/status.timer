@@ -3,7 +3,7 @@ Description=Run status check every 1 minute
 
 [Timer]
 OnBootSec=2min
-OnUnitActiveSec=5min
+OnUnitActiveSec=1min
 Unit=status.service
 
 [Install]

@@ -3,4 +3,5 @@ Description=Health Check
 
 [Service]
 Type=oneshot
-ExecStart= ../scripts/status.sh
+WorkingDirectory=/home/ubuntu/devops-week1-project
+ExecStart=/home/ubuntu/devops-week1-project/scripts/status.sh

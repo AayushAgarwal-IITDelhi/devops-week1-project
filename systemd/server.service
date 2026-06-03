@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 -m http.server 8000 --directory /var/www/status
+ExecStart=/usr/bin/python3 -m http.server 8000 --directory /home/ubuntu/devops-week1-project/pages
 Restart=on-failure
 RestartSec=5
 
