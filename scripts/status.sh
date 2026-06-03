@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
 webs=(
     "https://www.google.com"
     "https://www.youtube.com"
@@ -18,7 +21,7 @@ for i in "${!webs[@]}"; do
     fi
 done
 
-cat > ../pages/index.html << EOF
+cat > ../pages/status.html << EOF
 <html>
 <title>Status Logs</title>
 <body>
