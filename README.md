@@ -40,3 +40,4 @@ curl http://localhost:8000        # Python server
 curl http://localhost             # nginx proxy
 journalctl -u status.service      # check logs
 ```
+![Project Screenshot](Screenshot_Project_Week1.png)
