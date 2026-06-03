@@ -18,7 +18,7 @@ for i in "${!webs[@]}"; do
     fi
 done
 
-cat > index.html << EOF
+cat > ../pages/index.html << EOF
 <html>
 <title>Status Logs</title>
 <body>
