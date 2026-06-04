@@ -1,0 +1,5 @@
+https://www.google.com up
+https://www.youtube.com up
+https://claude.ai/ up
+https://webmail.iitd.ac.in/ up
+http://localhost:8080 up

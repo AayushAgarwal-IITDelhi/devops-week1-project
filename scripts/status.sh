@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#env variables
+source "$(dirname "$0")/../.env"
+
+#webs to check
+
 webs=(
     "https://www.google.com"
     "https://www.youtube.com"
@@ -11,6 +16,8 @@ webs=(
 
 webs_status=("down" "down" "down" "down" "down")
 
+#check status of webs
+
 for i in "${!webs[@]}"; do
     if curl -s --max-time 10 "${webs[$i]}" > /dev/null 2>&1; then
         webs_status[$i]="up"
@@ -19,7 +26,11 @@ for i in "${!webs[@]}"; do
     fi
 done
 
-cat > /home/ubuntu/devops-week1-project/pages/index.html << EOF
+#update last status on html page
+
+HTML="$(dirname "$0")/../pages/index.html"
+
+cat > "$HTML" << EOF
 <html>
 <title>Status Logs</title>
 <body>
@@ -31,3 +42,21 @@ done
 </body>
 </html>
 EOF
+
+#send slack notification if status has changed
+
+LOG="$(dirname "$0")/../pages/last_status.txt"
+
+for i in "${!webs[@]}"; do
+    link="${webs[$i]}"
+    last=$(awk -v site="$link" '$1 == site {print $2}' "$LOG" 2>/dev/null || echo "down")
+    if [[ "${webs_status[$i]}" == "down" && "$last" == "up" ]]; then
+        curl -s -X POST -H 'Content-type: application/json' --data "{\"text\":\"$link is down.\"}" "$SLACK_WEBHOOK"
+    fi
+done
+
+#update status in last_status.txt
+
+for i in "${!webs[@]}"; do
+    echo "${webs[$i]} ${webs_status[$i]}"
+done > "$LOG"
