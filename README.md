@@ -40,4 +40,27 @@ curl http://localhost:8000        # Python server
 curl http://localhost             # nginx proxy
 journalctl -u status.service      # check logs
 ```
+
+To view the page on your browswer first find your VM's IP:
+
+```bash
+multipass info dev | grep IPv4
+```
+Then open in your browser: http://your-vm-ip
+Note: Since we have set up an nginx proxy, we dont need to specify port.
+
 ![Project Screenshot](Screenshot_Project_Week1.png)
+
+
+## Slack Webhook (Bonus)
+
+To set up Slack Webhook, install a Slack app and get its webhook URL.
+Store in an .env file (like .env.example)
+Reload services:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart status.service
+```
+
+![Project Screenshot](Screenshot_Project_Week1_Slack.png)
